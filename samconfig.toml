@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "markdata-token-issuer-pysam"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-65xpitvyr2hy"
+s3_prefix = "markdata-token-issuer-pysam"
+region = "us-east-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+
