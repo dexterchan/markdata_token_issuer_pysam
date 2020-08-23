@@ -37,9 +37,13 @@ def lambda_handler(event, context):
         'headers': {
             'Access-Control-Allow-Headers': 'Content-Type',
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+            'Access-Control-Allow-Credentials': True
         },
         "body": json.dumps({
             "jwt": encodedTokenStr,
         }),
     }
+#https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html
+#https://www.serverless.com/framework/docs/providers/aws/events/apigateway/#lambda-proxy-integration
+#https://alexharv074.github.io/2019/03/31/introduction-to-sam-part-iii-adding-a-proxy-endpoint-and-cors-configuration.html
