@@ -12,7 +12,8 @@ class JWT_Crypto:
     def generateJWT(self, key, messageDict: dict, diff:timedelta):
         messageDict["exp"] = datetime.utcnow() + diff
         encoded = jwt.encode(messageDict, key, algorithm='HS256')
-        return encoded
+        expDate = messageDict["exp"]
+        return encoded, expDate
 
     def decodeJWT(self, token, key):
         try:

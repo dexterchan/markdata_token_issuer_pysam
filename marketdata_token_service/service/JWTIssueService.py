@@ -33,9 +33,8 @@ class JwtIssueService:
     def issueJWTToken(self, validHours):
         message = {}
         message["issuer"] = "Market Data Streaming service Lambda"
-        encodedJWT = self.crypto.generateJWT(self.signKey, message, timedelta(hours=validHours))
+        encodedJWT, expDate = self.crypto.generateJWT(self.signKey, message, timedelta(seconds=validHours))
 
-
-        return encodedJWT
+        return encodedJWT, expDate
 
 

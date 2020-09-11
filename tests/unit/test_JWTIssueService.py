@@ -32,7 +32,10 @@ class TestJWTIssueService(unittest.TestCase):
         try:
             expTime = datetime.utcnow() +  timedelta(hours=hours)
             jwtIssueService = JwtIssueService()
-            encodedToken = jwtIssueService.issueJWTToken(hours)
+
+            refExpDate = (datetime.utcnow() + timedelta(hours=hours)).timestamp()
+            encodedToken, expDate = jwtIssueService.issueJWTToken(hours)
+            self.assertGreaterEqual(expDate, refExpDate)
             print(encodedToken)
             secret = jwtIssueService.getEncryptedParameter();
             decodedJson = crypto.decodeJWT(encodedToken,secret )
