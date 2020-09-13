@@ -50,7 +50,7 @@ Resources:
       Environment:
         Variables:
           JWTKEYID: "/mktsvc/dev/JWT_SECRET"
-          DURATION_SECONDS: "30"
+          DURATION_SECONDS: "35"
       Policies:
           - AmazonSSMReadOnlyAccess
           - Statement:
