@@ -119,3 +119,8 @@ aws cloudformation delete-stack --stack-name AWS
 See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an introduction to SAM specification, the SAM CLI, and serverless application concepts.
 
 Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
+
+## Debug
+Debug LAMBDA locally in PyCharm
+Please add "/Applications" into Docker>File Sharing first.
+https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/invoke-lambda.html
