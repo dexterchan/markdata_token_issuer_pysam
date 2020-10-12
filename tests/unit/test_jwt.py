@@ -17,7 +17,9 @@ class MarketDataServiceSuite(unittest.TestCase):
         message["issuer"] = "abc"
         message["role"] = "user"
         key = "abcd"
-        encodedJWT = crypto.generateJWT(key, message, timedelta(hours=1))
+        refExpDate = (datetime.utcnow() + timedelta(seconds=10)).timestamp()
+        encodedJWT, expDate = crypto.generateJWT(key, message, timedelta(seconds=10))
+        self.assertGreaterEqual(expDate, refExpDate)
 
         self.assertIsNotNone(encodedJWT)
         logging.info(encodedJWT)
@@ -38,8 +40,9 @@ class MarketDataServiceSuite(unittest.TestCase):
         message["issuer"] = "abc"
         message["role"] = "user"
         key = "abcd"
-        encodedJWT = crypto.generateJWT(key, message, timedelta(hours=-1))
-
+        refExpDate = (datetime.utcnow() + timedelta(seconds=10)).timestamp()
+        encodedJWT, expDate = crypto.generateJWT(key, message, timedelta(seconds=-1))
+        self.assertGreaterEqual(expDate, refExpDate)
         self.assertIsNotNone(encodedJWT)
 
 
@@ -53,8 +56,9 @@ class MarketDataServiceSuite(unittest.TestCase):
         message["issuer"] = "abc"
         message["role"] = "user"
         key = "abcd"
-        encodedJWT = crypto.generateJWT(key, message, timedelta(hours=1))
-
+        refExpDate = (datetime.utcnow() + timedelta(seconds=10)).timestamp()
+        encodedJWT, expDate = crypto.generateJWT(key, message, timedelta(seconds=10))
+        self.assertGreaterEqual(expDate, refExpDate)
         self.assertIsNotNone(encodedJWT)
         key = "abcd2"
 

@@ -1,10 +1,10 @@
 import json
-
+import os
 from datetime import datetime, timedelta
 from service.JWTIssueService import JwtIssueService
 
 jwtIssueService = JwtIssueService()
-hours = 720
+seconds = int(os.environ["DURATION_SECONDS"])
 def lambda_handler(event, context):
     """Sample pure Lambda function
 
@@ -26,8 +26,7 @@ def lambda_handler(event, context):
 
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
-    expTime = datetime.utcnow() + timedelta(hours=hours)
-    encodedToken = jwtIssueService.issueJWTToken(hours)
+    encodedToken, expDate = jwtIssueService.issueJWTToken(seconds)
 
     encodedTokenStr = encodedToken.decode("utf-8")
 
@@ -37,9 +36,14 @@ def lambda_handler(event, context):
         'headers': {
             'Access-Control-Allow-Headers': 'Content-Type',
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+            'Access-Control-Allow-Credentials': True
         },
         "body": json.dumps({
             "jwt": encodedTokenStr,
+            "expDate": expDate
         }),
     }
+#https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html
+#https://www.serverless.com/framework/docs/providers/aws/events/apigateway/#lambda-proxy-integration
+#https://alexharv074.github.io/2019/03/31/introduction-to-sam-part-iii-adding-a-proxy-endpoint-and-cors-configuration.html
